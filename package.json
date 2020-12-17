@@ -22,6 +22,7 @@
         "bulma": "^0.9.1"
     },
     "dependencies": {
-        "bulma": "^0.9.1"
+        "bulma": "^0.9.1",
+        "moment": "^2.29.1"
     }
 }

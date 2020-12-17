@@ -3,15 +3,15 @@ import VueRouter from 'vue-router';
 let routes = [
     {
         path: '/',
-        component: require('./views/Home')
+        component: require('./views/Home').default
     },
     {
         path: '/about',
-        component: require('./views/About')
+        component: require('./views/About').default
     },
     {
         path: '/contact',
-        component: require('./views/Contact')
+        component: require('./views/Contact').default
     }
 ];
 
