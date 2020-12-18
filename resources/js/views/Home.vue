@@ -5,17 +5,18 @@
                 <div class="message" v-for="status in statuses">
                     <div class="message-header">
                         <p>
-                            {{ status.user.name }} said...
+                            {{ status.user.name | capitalize }} said...
                         </p>
                         <p>
-                            {{ postedOn(status) }}
+<!--                            {{ postedOn(status) }}-->
+                            {{ status.created_at | ago }}
                         </p>
                     </div>
 
-                    <div class="message-body" v-text="status.body">
-                        I'm the home page!
-                    </div>
+                    <div class="message-body" v-text="status.body"></div>
                 </div>
+
+                <add-to-stream @completed="addStatus"></add-to-stream>
 
             </div>
         </div>
@@ -24,12 +25,24 @@
 
 <script>
     import moment from 'moment';
-    import Status from "../models/Status";
+    import Status from '../models/Status';
+    import AddToStream from '../components/AddToStream.vue';
 
     export default {
+        components: { AddToStream },
+
         data() {
             return {
                 statuses: []
+            }
+        },
+
+        filters: {
+            ago(date) {
+                return moment(date).fromNow();
+            },
+            capitalize(value) {
+                return value.toUpperCase();
             }
         },
 
@@ -38,8 +51,16 @@
         },
 
         methods: {
-            postedOn(status) {
+            /*postedOn(status) {
                 return moment(status.created_at).fromNow();
+            },*/
+
+            addStatus(status) {
+                this.statuses.unshift(status);
+
+                alert('Your status has been added to the stream.');
+
+                window.scrollTo(0, 0);
             }
         }
     }
